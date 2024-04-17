@@ -1,23 +1,20 @@
-import useSWR from 'swr';
+import useSWR from "swr";
+import axios from "axios";
 
-const NEWS_API_URL = 'https://newsapi.org/v2/everything?q=apple&from=2024-04-16&to=2024-04-16&sortBy=popularity&apiKey=4ae7de8f989640a499d76121a8bf896a';
-
-const fetcher = async () => {
-  const response = await fetch(NEWS_API_URL);
-  if (!response.ok) {
-    throw new Error('Failed to fetch data');
-  }
-  return response.json();
+// Fetcher function to fetch data from the provided URL using axios
+const fetcher = async (url: string) => {
+  const response = await axios.get(url);
+  return response.data;
 };
 
-const useNewsData = () => {
-  const { data, error, mutate } = useSWR(null, fetcher, { revalidateOnMount: false });
+// Custom hook to fetch news data using SWR
+const useNewsData = (url: string) => {
+  // Fetch news data using useSWR hook, passing the URL and fetcher function
+  const { data, error } = useSWR(url, fetcher);
 
+  // Return news data, loading state, and error state
   return {
-    newsData: data,
-    isLoading: !error && !data,
-    isError: error,
-    fetchNews: mutate,
+    newsData: data, // Fetched news data
   };
 };
 

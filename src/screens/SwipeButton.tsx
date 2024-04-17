@@ -1,25 +1,26 @@
-// src/components/SwipeButton.tsx
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Animated } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, Animated } from 'react-native';
 
 interface SwipeButtonProps {
-  onSwipe: () => void;
+  onSwipe: () => void; // Function to be called when the button is swiped
 }
 
 const SwipeButton: React.FC<SwipeButtonProps> = ({ onSwipe }) => {
-  const swipeX = React.useRef(new Animated.Value(0)).current;
+  const swipeX = React.useRef(new Animated.Value(0)).current; // Animated value to track swipe position
 
+  // Function to handle swipe gesture
   const handleSwipe = () => {
     Animated.timing(swipeX, {
       toValue: 1,
       duration: 300,
       useNativeDriver: false,
     }).start(() => {
-      onSwipe();
-      swipeX.setValue(0);
+      onSwipe(); // Call the onSwipe function when swipe animation completes
+      swipeX.setValue(0); // Reset swipe position
     });
   };
 
+  // Style for animating the button's position
   const swipeStyle = {
     transform: [
       {
