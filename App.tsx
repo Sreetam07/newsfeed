@@ -3,8 +3,11 @@ import { View, StyleSheet, ScrollView, Text, Alert } from 'react-native';
 import SwipeButton from './src/screens/SwipeButton';
 
 const App: React.FC = () => {
+  const [isFetching, setIsFetching] = useState(false);
+
   const handleFetchNews = () => {
     Alert.alert("Right swipe")
+    setIsFetching(true);
   };
 
   return (
@@ -12,6 +15,7 @@ const App: React.FC = () => {
       <ScrollView contentContainerStyle={styles.scrollView}>
         <View style={styles.swipeButtonContainer}>
           <SwipeButton onSwipe={handleFetchNews} />
+          {!isFetching && <Text style={styles.noNewsText}>No news</Text>}
         </View>
       </ScrollView>
     </View>
@@ -30,6 +34,12 @@ const styles = StyleSheet.create({
   swipeButtonContainer: {
     alignItems: 'center',
     marginBottom: 20,
+  },
+  noNewsText: {
+    textAlign: 'center',
+    marginTop: 20,
+    fontSize: 18,
+    color: '#555',
   },
 });
 
