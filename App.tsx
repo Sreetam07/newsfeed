@@ -1,8 +1,36 @@
-import React from 'react'
-import NewsFeed from './src/screens/NewsFeed'
+import React, { useState } from 'react';
+import { View, StyleSheet, ScrollView, Text, Alert } from 'react-native';
+import SwipeButton from './src/screens/SwipeButton';
 
-export default function App() {
+const App: React.FC = () => {
+  const handleFetchNews = () => {
+    Alert.alert("Right swipe")
+  };
+
   return (
-    <NewsFeed />
-  )
-}
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        <View style={styles.swipeButtonContainer}>
+          <SwipeButton onSwipe={handleFetchNews} />
+        </View>
+      </ScrollView>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  scrollView: {
+    flexGrow: 1,
+    paddingVertical: 20,
+  },
+  swipeButtonContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+});
+
+export default App;
