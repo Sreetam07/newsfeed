@@ -32,6 +32,7 @@ News Feed App is a React Native application that fetches and displays news artic
 5. **To configure the News API key:**
   Obtain an API key from the News API.
   Replace the placeholder API key in the `src/screens/App.tsx` file with your API key.
+
   `const NEWS_API_URL = 'https://newsapi.org/v2/everything?q=tesla&from=2024-04-16&to=2024-04-16&sortBy=popularity&apiKey=YOUR_API_KEY';`
 
 
